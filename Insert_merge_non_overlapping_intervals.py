@@ -9,23 +9,24 @@ This is because the new interval [4,9] overlaps with [3,5],[6,7],[8,10].
 '''
 import unittest
 
-def insert_merge_non_overlapping_intervals(a, b):
+def insert_merge_non_overlapping_intervals(givenIntervals, intervalToInsert):
+    print("\nInsert {} interval into this given set of intervals {}".format(intervalToInsert, givenIntervals))
     left = []
     right = []
     result = []
     start = None
     end = None
     # find the right part
-    for each in a:
-        if each[1] < b[0]:
+    for each in givenIntervals:
+        if each[1] < intervalToInsert[0]:
             left.append(each)
         else:
             break    
     
     # find the left part
-    for i in reversed(range(len(a))):
-        if a[i][0] > b[1]:
-            right.insert(0, a[i])
+    for i in reversed(range(len(givenIntervals))):
+        if givenIntervals[i][0] > intervalToInsert[1]:
+            right.insert(0, givenIntervals[i])
         else:
             break    
 
@@ -33,15 +34,15 @@ def insert_merge_non_overlapping_intervals(a, b):
     mergedlist = []
     mergedlist.append(left)
     mergedlist.extend(right)
-    if mergedlist != a:
-        if len(a) != len(left):
-            start = min(b[0], a[len(left)][0])
+    if mergedlist != givenIntervals:
+        if len(givenIntervals) != len(left):
+            start = min(intervalToInsert[0], givenIntervals[len(left)][0])
         else:
-            start = b[0]    
-        if len(a) != len(right):
-            end   = max(b[1], a[len(a)-len(right)-1][1])
+            start = intervalToInsert[0]
+        if len(givenIntervals) != len(right):
+            end   = max(intervalToInsert[1], givenIntervals[len(givenIntervals) - len(right) - 1][1])
         else:
-            end = b[1]    
+            end = intervalToInsert[1]
 
     if len(left) != 0:
         result = left
@@ -49,7 +50,8 @@ def insert_merge_non_overlapping_intervals(a, b):
         result.append([start, end])
     if len(right) != 0:
         result.extend(right)        
-    
+
+    print("The results: {}".format(result))
     return result  
 
 
