@@ -45,3 +45,6 @@ class TestSolution(unittest.TestCase):
         stringToTest = "1236547899787"
         result = Solution().lengthOfLongestSubstring(stringToTest)
         self.assertEqual(9, result)
+
+    def test_empty_string(self):
+        self.assertEqual(Solution().lengthOfLongestSubstring(""), 0)
