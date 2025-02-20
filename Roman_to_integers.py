@@ -22,9 +22,6 @@ Given a roman numeral, convert it to an integer.
 
 import unittest
 
-from urllib3 import ProxyManager
-
-
 class Solution(object):
     def romanToInt(self, s):
         """
@@ -51,6 +48,7 @@ class Solution(object):
                 totalInteger += romanToIntegers[s[i]]
         print(" ==> {} translates to {}.".format(s, totalInteger))
         return totalInteger
+
 
 class TestSolution(unittest.TestCase):
     def test_X_should_return_10(self):
