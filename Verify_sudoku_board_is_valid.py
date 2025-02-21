@@ -44,7 +44,7 @@ class Solution(object):
         return resultRows and resultColumns and resultsSquare
 
     def verifyRowsValid(self, board):
-        print("Verify rows")
+        print("\nVerify rows")
         for row in board:
             if len(row) != 9:
                 print("===> !!! Too many elements")
@@ -56,7 +56,7 @@ class Solution(object):
 
 
     def verifyColumnsValid(self, board):
-        print("Verify columns")
+        print("\nVerify columns")
         for columns in zip(*board):
             if len(columns) != 9:
                 return False
@@ -67,7 +67,7 @@ class Solution(object):
 
 
     def verifyBoxsValid(self, board):
-        print("Verify boxs")
+        print("\nVerify squares")
         square = []
         for i in (0, 3, 6):
             for j in (0, 3, 6):
@@ -101,6 +101,7 @@ class Solution(object):
 
 class TestSudoku(unittest.TestCase):
     def test_case_valid(self):
+        print("\n*** TC: Valid Sudoku")
         board = [["5","3",".",".","7",".",".",".","."]
                 ,["6",".",".","1","9","5",".",".","."]
                 ,[".","9","8",".",".",".",".","6","."]
@@ -115,6 +116,7 @@ class TestSudoku(unittest.TestCase):
         self.assertEqual(expected, actual)
 
     def test_case_dup_in_square(self):
+        print("\n*** TC: Dup in a square")
         board = [["8","3",".",".","7",".",".",".","."]
                 ,["6",".",".","1","9","5",".",".","."]
                 ,[".","9","8",".",".",".",".","6","."]
@@ -129,6 +131,7 @@ class TestSudoku(unittest.TestCase):
         self.assertEqual(expected, actual)
 
     def test_case_duplicate_in_2nd_row(self):
+        print("\n*** TC: Dup in a row")
         board = [["5","3",".",".","7",".",".",".","."]
                 ,["6",".",".","1","9","5",".","1","."]
                 ,[".","9","8",".",".",".",".","6","."]
@@ -143,6 +146,7 @@ class TestSudoku(unittest.TestCase):
         self.assertEqual(expected, actual)
 
     def test_case_duplicate_in_2nd_column(self):
+        print("\n*** TC: Dup in a column")
         board = [["5","3",".",".","7",".",".",".","."]
                 ,["6",".",".","1","9","5",".",".","."]
                 ,[".","9","8",".",".",".",".","6","."]
@@ -157,6 +161,7 @@ class TestSudoku(unittest.TestCase):
         self.assertEqual(expected, actual)
 
     def test_case_extra_element(self):
+        print("\n*** TC: An etra element in the sudoku board")
         board = [["5","3",".",".","7",".",".",".",".","."]
                 ,["6",".",".","1","9","5",".",".","."]
                 ,[".","9","8",".",".",".",".","6","."]
@@ -171,6 +176,7 @@ class TestSudoku(unittest.TestCase):
         self.assertEqual(expected, actual)
 
     def test_case_wrong_value(self):
+        print("\n*** TC: Wrong Value")
         board = [["5","3",".",".","7",".",".",".","."]
                 ,["6",".",".","1","9","5",".",".","."]
                 ,[".","9","8",".",".",".","11","6","."]
