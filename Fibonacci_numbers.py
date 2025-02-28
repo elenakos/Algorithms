@@ -1,5 +1,6 @@
 '''
 Return n-element from the Fibonacci sequence
+This file contains three solutions
 '''
 
 import unittest
@@ -28,6 +29,16 @@ class Solution():
             return n
         else:
             return self.returnElementFromFibonacciRecurs(n-1) + self.returnElementFromFibonacciRecurs( n-2)
+
+    def returnElementFromFibonacciList(self, n):
+        print("\nReturn {}th element from the Fibonacci sequence".format(n))
+        if n <= 1:
+            return n
+        elements = [0, 1]
+        for i in range(2, n+1):
+            elements.append(elements[i-1] + elements[i-2])
+        return elements[n]
+
 
 class TestSolution(unittest.TestCase):
     def test_case_0(self):
@@ -70,4 +81,16 @@ class TestSolution(unittest.TestCase):
         n = 20
         expected = 6765
         actual = Solution().returnElementFromFibonacciRecurs(n)
+        self.assertEqual(expected, actual)
+
+    def test_case_5_list(self):
+        n = 5
+        expected = 5
+        actual = Solution().returnElementFromFibonacciList(n)
+        self.assertEqual(expected, actual)
+
+    def test_recursive_case_20_list(self):
+        n = 20
+        expected = 6765
+        actual = Solution().returnElementFromFibonacciList(n)
         self.assertEqual(expected, actual)
