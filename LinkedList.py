@@ -2,7 +2,7 @@
 This file contains implementation of basic operations with linked lists:
 - append, prepend, insert, delete, traverse
 - reverse, find a middle node, find n-th mode
-
+- rotate to the right by k-place
 '''
 import unittest
 
@@ -75,7 +75,6 @@ class UnorderedList():
         next = current.getNext()
         next1 = next.getNext()
         current.setNext(next1)
-
 
     def insert(self, pos, item):
         print("Insert item at position %d" % pos)
@@ -152,7 +151,44 @@ class UnorderedList():
             current = next
         self.head = previous
 
+    def rotateRight(self, head, k):
+        print("Rotate right by %d element" % k)
+        list_size = self.size()
+        if k == 0:
+            return
+        if k > list_size - 1:
+            return
+        if head is None:
+            return
+        # Find the last element
+        tail = head
+        i = 0
+        while i < list_size - 1:
+            tail = tail.getNext()
+            i += 1
+        # Find the K-element, point the past element tp a head, and make k-elements as a head
+        current = head
+        while k > 0:
+            current = current.getNext()
+            k -= 1
+        tail.next = head
+        self.head = current.next
+        current.next = None
+
+
 class TestListNode(unittest.TestCase):
+    def test_rotate_list(self):
+        print("\n*** TC: Rotate the list")
+        myArray = [1, 2, 3, 4, 5]
+        mylist = UnorderedList()
+        mylist.create_list_from_array(myArray)
+        myHead = ListNode()
+        myHead = mylist.return_n_element_from_list(0)
+        mylist.rotateRight(myHead, 2)
+        expected = [4, 5, 1, 2, 3]
+        actual = mylist.create_list_as_array()
+        self.assertEqual(expected, actual)
+
     def test_prepend_an_empty_list(self):
         print("\n*** TC: Prepend an empty list")
         mylist = UnorderedList()
