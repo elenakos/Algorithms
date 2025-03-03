@@ -175,8 +175,31 @@ class UnorderedList():
         self.head = current.next
         current.next = None
 
+    def ifPalindrome(self):
+        print("Check if a linked list is a palindrome")
+        list = self.create_list_as_array()
+        left = 0
+        right = len(list) - 1
+        while left <= right:
+            if list[left] != list[right]:
+                return False
+            left += 1
+            right -= 1
+        return True
+
 
 class TestListNode(unittest.TestCase):
+    def test_verify_if_palindrome(self):
+        print("*** TC: Verify if a linked list is a palindrome")
+        myArray = [1, 2, 3, 4, 5]
+        myArray = [1, 2, 3, 4, 5]
+        mylist = UnorderedList()
+        mylist.create_list_from_array(myArray)
+        expected = False
+        actual = mylist.ifPalindrome()
+        self.assertEqual(expected, actual)
+
+
     def test_rotate_list(self):
         print("\n*** TC: Rotate the list")
         myArray = [1, 2, 3, 4, 5]
