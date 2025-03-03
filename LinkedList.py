@@ -151,7 +151,7 @@ class UnorderedList():
             current = next
         self.head = previous
 
-    def rotateRight(self, head, k):
+    def rotate_right(self, head, k):
         print("Rotate right by %d element" % k)
         list_size = self.size()
         if k == 0:
@@ -175,7 +175,7 @@ class UnorderedList():
         self.head = current.next
         current.next = None
 
-    def ifPalindrome(self):
+    def is_palindrome(self):
         print("Check if a linked list is a palindrome")
         list = self.create_list_as_array()
         left = 0
@@ -187,18 +187,43 @@ class UnorderedList():
             right -= 1
         return True
 
+    def sort_list(self):
+        print("Sort the list")
+        # Create an array out of a list
+        myArray = self.create_list_as_array()
+        # Sort the array
+        arraySize = len(myArray)
+        for i in range(arraySize-1, 0, -1):
+            for j in range(i):
+                if myArray[j] > myArray[j+1]:
+                    myArray[j], myArray[j+1] = myArray[j+1], myArray[j]
+        print("=== Sored array: ", myArray)
+        # Create a new list from an array
+        self.head = None
+        self.create_list_from_array(myArray)
+
+
 
 class TestListNode(unittest.TestCase):
+    def test_case_sort_a_list(self):
+        print("*** TC: Sort a list")
+        myArray = [100, 2, -33, 44, 5]
+        mylist = UnorderedList()
+        mylist.create_list_from_array(myArray)
+        mylist.sort_list()
+        expected = [-33, 2, 5, 44, 100]
+        actual = mylist.create_list_as_array()
+        self.assertEqual(expected, actual)
+
+
     def test_verify_if_palindrome(self):
         print("*** TC: Verify if a linked list is a palindrome")
-        myArray = [1, 2, 3, 4, 5]
         myArray = [1, 2, 3, 4, 5]
         mylist = UnorderedList()
         mylist.create_list_from_array(myArray)
         expected = False
-        actual = mylist.ifPalindrome()
+        actual = mylist.is_palindrome()
         self.assertEqual(expected, actual)
-
 
     def test_rotate_list(self):
         print("\n*** TC: Rotate the list")
@@ -207,7 +232,7 @@ class TestListNode(unittest.TestCase):
         mylist.create_list_from_array(myArray)
         myHead = ListNode()
         myHead = mylist.return_n_element_from_list(0)
-        mylist.rotateRight(myHead, 2)
+        mylist.rotate_right(myHead, 2)
         expected = [4, 5, 1, 2, 3]
         actual = mylist.create_list_as_array()
         self.assertEqual(expected, actual)
