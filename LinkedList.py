@@ -2,7 +2,7 @@
 This file contains implementation of basic operations with linked lists:
 - append, prepend, insert, delete, traverse
 - reverse, find a middle node, find n-th mode
-- rotate to the right by k-place
+- sort, rotate to the right by k-place
 '''
 import unittest
 
@@ -202,11 +202,67 @@ class UnorderedList():
         self.head = None
         self.create_list_from_array(myArray)
 
+    def merge_two_lists(self, list1, list2):
+        """
+        :type list1: Optional[ListNode]
+        :type list2: Optional[ListNode]
+        :rtype: Optional[ListNode]
+        """
+        if list1 is None:
+            return list2
+        if list2 is None:
+            return list1
+
+        # Create a new head
+        newHead = current = ListNode()
+        current1 = list1.head
+        current2 = list2.head
+
+        # Traverse lists and attach elements from both links in order to a new head
+        while current1 and current2:
+            if current1.val < current2.val:
+                current.next = current1
+                current1 = current1.next
+            else:
+                current.next = current2
+                current2 = current2.next
+            current = current.next
+        if current1:
+            current.next = current1
+        if current2:
+            current.next = current2
+        return newHead.next
+
+    @staticmethod
+    def traverse_list_from_head_return_array(head):
+        print("Traverse the list")
+        myArray = []
+        current = head
+        while current is not None:
+            myArray.append(current.getData())
+            current = current.next
+        return myArray
 
 
 class TestListNode(unittest.TestCase):
+    def test_merge_two_lists(self):
+        print("\n*** TC: Merge two lists")
+        list1 = UnorderedList()
+        array1 = [1, 2, 3]
+        list1.create_list_from_array(array1)
+        list2 = UnorderedList()
+        array2 = [1, 4, 5, 6]
+        list2.create_list_from_array(array2)
+        mergedList = UnorderedList()
+        expectedList = [1, 1, 2, 3, 4, 5, 6]
+        actualList = mergedList.merge_two_lists(list1, list2)
+        actualArray = UnorderedList().traverse_list_from_head_return_array(actualList)
+        self.assertEqual(expectedList, actualArray)
+
+
+
     def test_case_sort_a_list(self):
-        print("*** TC: Sort a list")
+        print("\n*** TC: Sort a list")
         myArray = [100, 2, -33, 44, 5]
         mylist = UnorderedList()
         mylist.create_list_from_array(myArray)
@@ -217,7 +273,7 @@ class TestListNode(unittest.TestCase):
 
 
     def test_verify_if_palindrome(self):
-        print("*** TC: Verify if a linked list is a palindrome")
+        print("\n*** TC: Verify if a linked list is a palindrome")
         myArray = [1, 2, 3, 4, 5]
         mylist = UnorderedList()
         mylist.create_list_from_array(myArray)
