@@ -190,19 +190,20 @@ class UnorderedList():
     def sort_list(self):
         print("Sort the list")
         # Create an array out of a list
-        myArray = self.create_list_as_array()
+        my_array = self.create_list_as_array()
         # Sort the array
-        arraySize = len(myArray)
-        for i in range(arraySize-1, 0, -1):
+        array_size = len(my_array)
+        for i in range(array_size-1, 0, -1):
             for j in range(i):
-                if myArray[j] > myArray[j+1]:
-                    myArray[j], myArray[j+1] = myArray[j+1], myArray[j]
-        print("=== Sored array: ", myArray)
+                if my_array[j] > my_array[j+1]:
+                    my_array[j], my_array[j+1] = my_array[j+1], my_array[j]
+        print("=== Sored array: ", my_array)
         # Create a new list from an array
         self.head = None
-        self.create_list_from_array(myArray)
+        self.create_list_from_array(my_array)
 
-    def merge_two_lists(self, list1, list2):
+    @staticmethod
+    def merge_two_lists(list1, list2):
         """
         :type list1: Optional[ListNode]
         :type list2: Optional[ListNode]
@@ -236,15 +237,15 @@ class UnorderedList():
     @staticmethod
     def traverse_list_from_head_return_array(head):
         print("Traverse the list")
-        myArray = []
+        my_array = []
         current = head
         while current is not None:
-            myArray.append(current.getData())
+            my_array.append(current.getData())
             current = current.next
-        return myArray
+        return my_array
 
 
-class TestListNode(unittest.TestCase):
+class TestUnorderedList(unittest.TestCase):
     def test_merge_two_lists(self):
         print("\n*** TC: Merge two lists")
         list1 = UnorderedList()
@@ -253,24 +254,35 @@ class TestListNode(unittest.TestCase):
         list2 = UnorderedList()
         array2 = [1, 4, 5, 6]
         list2.create_list_from_array(array2)
-        mergedList = UnorderedList()
-        expectedList = [1, 1, 2, 3, 4, 5, 6]
-        actualList = mergedList.merge_two_lists(list1, list2)
-        actualArray = UnorderedList().traverse_list_from_head_return_array(actualList)
-        self.assertEqual(expectedList, actualArray)
+        merged_list = UnorderedList()
+        expected_list = [1, 1, 2, 3, 4, 5, 6]
+        actual_list = merged_list.merge_two_lists(list1, list2)
+        actual_array = UnorderedList().traverse_list_from_head_return_array(actual_list)
+        self.assertEqual(expected_list, actual_array)
 
-
+    def test_merge_two_lists_empty(self):
+        print("\n*** TC: Merge two lists when one list is empty")
+        list1 = UnorderedList()
+        array1 = []
+        list1.create_list_from_array(array1)
+        list2 = UnorderedList()
+        array2 = [1, 4, 5, 6]
+        list2.create_list_from_array(array2)
+        merged_list = UnorderedList()
+        expected_list = [1, 4, 5, 6]
+        actual_list = merged_list.merge_two_lists(list1, list2)
+        actual_array = UnorderedList().traverse_list_from_head_return_array(actual_list)
+        self.assertEqual(expected_list, actual_array)
 
     def test_case_sort_a_list(self):
         print("\n*** TC: Sort a list")
-        myArray = [100, 2, -33, 44, 5]
+        my_array = [100, 2, -33, 44, 5]
         mylist = UnorderedList()
-        mylist.create_list_from_array(myArray)
+        mylist.create_list_from_array(my_array)
         mylist.sort_list()
         expected = [-33, 2, 5, 44, 100]
         actual = mylist.create_list_as_array()
         self.assertEqual(expected, actual)
-
 
     def test_verify_if_palindrome(self):
         print("\n*** TC: Verify if a linked list is a palindrome")
