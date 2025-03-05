@@ -33,9 +33,6 @@ class Solution:
             minV = remainder
        return maxV
 
-
-
-
 class TestSolution(unittest.TestCase):
 
     def test_case_1_better(self):
