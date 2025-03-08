@@ -38,9 +38,7 @@ class Solution(object):
         reminder = amount
         counter = 0
         array_size = len(coins)
-
         result =  {}
-
         for i in range(array_size-1, -1, -1):
             if reminder >= coins[i]:
                 num = reminder//coins[i]
@@ -64,7 +62,7 @@ class TestSolution(unittest.TestCase):
         self.assertEqual(actual, expected)
 
     def test_case_valid_data_1_dp(self):
-        print("\n*** TC: Valid data with a solution for 11")
+        print("\n*** TC: Valid data with a solution for 11 - with DP")
         coins = [1, 2, 5]
         amount = 11
         expected = 3
@@ -80,7 +78,7 @@ class TestSolution(unittest.TestCase):
         self.assertEqual(actual, expected)
 
     def test_case_valid_data_2_dp(self):
-        print("\n*** TC: Valid data with bigger amount with a solution for 78")
+        print("\n*** TC: Valid data with bigger amount with a solution for 78 - with DP")
         coins = [1, 2, 5]
         amount = 78
         expected = 17
