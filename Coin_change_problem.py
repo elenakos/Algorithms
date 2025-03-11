@@ -8,6 +8,9 @@ You may assume that you have an infinite number of each kind of coin.
 
 import unittest
 
+from fontTools.subset import remap
+
+
 class Solution(object):
     def coin_change_dp(self, coins, amount):
         """
@@ -35,21 +38,21 @@ class Solution(object):
         if amount == 0:
             return 0
         coins.sort()
-        reminder = amount
+        remainder = amount
         counter = 0
         array_size = len(coins)
         result =  {}
         for i in range(array_size-1, -1, -1):
-            if reminder >= coins[i]:
-                num = reminder//coins[i]
-                reminder = reminder - num*coins[i]
+            if remainder >= coins[i]:
+                num = remainder//coins[i]
+                remainder = remainder - num*coins[i]
                 counter = counter + num
                 result[coins[i]] = num
-        if reminder != 0:
+        if remainder != 0:
             return -1
         if counter == 0:
             return -1
-        print(" ==> Resulting set of coins: {}".format(result))
+        print(" ==> Resulting set of coins: {} or total of {} coins".format(result, counter))
         return counter
 
 class TestSolution(unittest.TestCase):
