@@ -40,8 +40,8 @@ class TennisGame:
 
     def get_score(self):
         if self.player1.score >= 3 and self.player2.score >= 3:
-            # Winning
             if abs(self.player1.score - self.player2.score) >= 2:
+                # Winning
                 if self.player1.score > self.player2.score:
                     return "Player 1 wins"
                 else:
@@ -114,3 +114,9 @@ class TestTennisGame(unittest.TestCase):
         expected = "Player 2 wins"
         actual = game.__str__()
         self.assertEqual(expected, actual)
+
+    def test_tennis_game_wrong_player(self):
+        game = TennisGame("Roger","Rafael")
+        with self.assertRaises(NameError) as context:
+            game.point_to("Serena")
+        self.assertEqual(str(context.exception), "Player 'Serena' is not a valid name")
