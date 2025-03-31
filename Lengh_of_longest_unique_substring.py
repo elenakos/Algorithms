@@ -1,7 +1,6 @@
 '''
 Given a string s, find the length of the longest substring without repeating characters.
 
-
 Example:
 
 Input: s = "abcabcbb"
@@ -30,7 +29,8 @@ class Solution(object):
                     break
                 allUniqueString.append(currentUnigueSubstring)
                 allLength.append(len(currentUnigueSubstring))
-        print("Unique string: {}".format(allUniqueString))
+        print("==> Unique string: {}".format(allUniqueString))
+        print("==> Length of longest substring: {}".format(max(allLength)))
         return max(allLength)
 
 

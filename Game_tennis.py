@@ -1,5 +1,5 @@
 '''
-This is the simpliest implementation of a game of tennis
+This is the simplest implementation of a game of tennis
 '''
 
 import unittest
@@ -30,7 +30,7 @@ class TennisGame:
         self.player1 = Player(player1)
         self.player2 = Player(player2)
 
-    def point_to(self, player_name):
+    def assign_point_to_player(self, player_name):
         if player_name == self.player1.name:
             self.player1.winning_point()
         elif player_name == self.player2.name:
@@ -64,53 +64,53 @@ class TennisGame:
 class TestTennisGame(unittest.TestCase):
     def test_tennis_game_score1(self):
         game = TennisGame("Roger","Rafael")
-        game.point_to("Roger")
+        game.assign_point_to_player("Roger")
         expected = "15-0"
         actual = game.__str__()
         self.assertEqual(expected, actual)
 
     def test_tennis_game_score2(self):
         game = TennisGame("Roger","Rafael")
-        game.point_to("Rafael")
+        game.assign_point_to_player("Rafael")
         expected = "0-15"
         actual = game.__str__()
         self.assertEqual(expected, actual)
 
     def test_tennis_game_deuce(self):
         game = TennisGame("Roger","Rafael")
-        game.point_to("Roger")
-        game.point_to("Roger")
-        game.point_to("Rafael")
-        game.point_to("Rafael")
-        game.point_to("Roger")
-        game.point_to("Rafael")
+        game.assign_point_to_player("Roger")
+        game.assign_point_to_player("Roger")
+        game.assign_point_to_player("Rafael")
+        game.assign_point_to_player("Rafael")
+        game.assign_point_to_player("Roger")
+        game.assign_point_to_player("Rafael")
         expected = "Deuce"
         actual = game.__str__()
         self.assertEqual(expected, actual)
 
     def test_tennis_game_advantage1(self):
         game = TennisGame("Roger","Rafael")
-        game.point_to("Roger")
-        game.point_to("Roger")
-        game.point_to("Rafael")
-        game.point_to("Rafael")
-        game.point_to("Roger")
-        game.point_to("Rafael")
-        game.point_to("Roger")
+        game.assign_point_to_player("Roger")
+        game.assign_point_to_player("Roger")
+        game.assign_point_to_player("Rafael")
+        game.assign_point_to_player("Rafael")
+        game.assign_point_to_player("Roger")
+        game.assign_point_to_player("Rafael")
+        game.assign_point_to_player("Roger")
         expected = "Advantage Player 1"
         actual = game.__str__()
         self.assertEqual(expected, actual)
 
     def test_tennis_game_won2(self):
         game = TennisGame("Roger","Rafael")
-        game.point_to("Roger")
-        game.point_to("Roger")
-        game.point_to("Rafael")
-        game.point_to("Rafael")
-        game.point_to("Roger")
-        game.point_to("Rafael")
-        game.point_to("Rafael")
-        game.point_to("Rafael")
+        game.assign_point_to_player("Roger")
+        game.assign_point_to_player("Roger")
+        game.assign_point_to_player("Rafael")
+        game.assign_point_to_player("Rafael")
+        game.assign_point_to_player("Roger")
+        game.assign_point_to_player("Rafael")
+        game.assign_point_to_player("Rafael")
+        game.assign_point_to_player("Rafael")
         expected = "Player 2 wins"
         actual = game.__str__()
         self.assertEqual(expected, actual)
@@ -118,5 +118,5 @@ class TestTennisGame(unittest.TestCase):
     def test_tennis_game_wrong_player(self):
         game = TennisGame("Roger","Rafael")
         with self.assertRaises(NameError) as context:
-            game.point_to("Serena")
+            game.assign_point_to_player("Serena")
         self.assertEqual(str(context.exception), "Player 'Serena' is not a valid name")

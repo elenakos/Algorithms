@@ -1,5 +1,5 @@
 '''
-Find a max pairwise product ina give array of positive numbers
+Find a max pairwise product in a given array of positive numbers
 Example 1:
 Input: nums = [1,3,5,0]
 Output: 15 as a product of two biggest numbers of 3 and 5
