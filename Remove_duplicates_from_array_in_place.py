@@ -15,19 +15,29 @@ class Solution(object):
         :type nums: List[int]
         :rtype: int
         """
-        print("Remove duplicates in-place from {} and return the number of unique elements".format(nums))
+        print("\nRemove duplicates in-place from {} and return the number of unique elements".format(nums))
+        if len(nums) < 2:
+            return len(nums)
         j = 1
         for i in range(1, len(nums)):
             if nums[i] != nums[i-1]:
                 nums[j] = nums[i]
                 j += 1
-        print("==> Final array with {} first unique number(s): {}".format(j, nums))
+        for k in range(j, len(nums)):
+            nums[k] = "_"
+        print("==> Final array with {} unique number(s): {}".format(j, nums))
         return j
 
 class TestSolution(unittest.TestCase):
-    def test_case_1(self):
+    def test_case_some_duplicates(self):
         nums = [0,0,1,1,1,2,2,3,3,4]
         expected = 5
+        actual = Solution().removeDuplicates(nums)
+        self.assertEqual(expected, actual)
+
+    def test_case_no_duplicates(self):
+        nums = [3, 5, 7, 9, 11, 13]
+        expected = 6
         actual = Solution().removeDuplicates(nums)
         self.assertEqual(expected, actual)
 
@@ -37,3 +47,14 @@ class TestSolution(unittest.TestCase):
         actual = Solution().removeDuplicates(nums)
         self.assertEqual(expected, actual)
 
+    def test_case_empty_array(self):
+        nums = []
+        expected = 0
+        actual = Solution().removeDuplicates(nums)
+        self.assertEqual(expected, actual)
+
+    def test_case_array_of_one_element(self):
+        nums = [5]
+        expected = 1
+        actual = Solution().removeDuplicates(nums)
+        self.assertEqual(expected, actual)
