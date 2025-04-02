@@ -40,7 +40,7 @@ class UnorderedList():
         self.head = temp
 
     def append(self, item):
-        print("Add item to the end of the list")
+        #print("Add item to the end of the list")
         temp = ListNode(item)
         temp.setData(item)
         if self.head is None:
@@ -132,7 +132,9 @@ class UnorderedList():
         while current is not None:
             count += 1
             current = current.getNext()
-        return current
+            if count == position:
+                return current.getData()
+        return None
 
 
     def reverse_list(self, head):
@@ -228,6 +230,8 @@ class UnorderedList():
                 current.next = current2
                 current2 = current2.next
             current = current.next
+
+        # In case one list is longer than the other:
         if current1:
             current.next = current1
         if current2:
@@ -260,7 +264,21 @@ class TestUnorderedList(unittest.TestCase):
         actual_array = UnorderedList().traverse_list_from_head_return_array(actual_list)
         self.assertEqual(expected_list, actual_array)
 
-    def test_merge_two_lists_empty(self):
+    def test_merge_two_lists_no_overlap(self):
+        print("\n*** TC: Merge two lists with no over-lapping")
+        list1 = UnorderedList()
+        array1 = [1, 2, 3]
+        list1.create_list_from_array(array1)
+        list2 = UnorderedList()
+        array2 = [15, 25, 65, 70, 80]
+        list2.create_list_from_array(array2)
+        merged_list = UnorderedList()
+        expected_list = [1, 2, 3, 15, 25, 65, 70, 80]
+        actual_list = merged_list.merge_two_lists(list1, list2)
+        actual_array = UnorderedList().traverse_list_from_head_return_array(actual_list)
+        self.assertEqual(expected_list, actual_array)
+
+    def test_merge_two_lists_one_empty(self):
         print("\n*** TC: Merge two lists when one list is empty")
         list1 = UnorderedList()
         array1 = []
@@ -435,4 +453,22 @@ class TestUnorderedList(unittest.TestCase):
         mylist.reverse_list(myHead)
         expected = [5, 4, 3, 2, 1, 0]
         actual = mylist.create_list_as_array()
+        self.assertEqual(expected, actual)
+
+    def test_return_n_element_from_list(self):
+        print("\n*** TC: Return the Nth element")
+        myArray = [0, 10, 25, 33, 4, 15]
+        mylist = UnorderedList()
+        mylist.create_list_from_array(myArray)
+        expected = 25
+        actual = mylist.return_n_element_from_list(2)
+        self.assertEqual(expected, actual)
+
+    def test_return_extra_element_from_list(self):
+        print("\n*** TC: Return the Nth element")
+        myArray = [0, 10, 25, 33, 4, 15, 3]
+        mylist = UnorderedList()
+        mylist.create_list_from_array(myArray)
+        expected = None
+        actual = mylist.return_n_element_from_list(7)
         self.assertEqual(expected, actual)
