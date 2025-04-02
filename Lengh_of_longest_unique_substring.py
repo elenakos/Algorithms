@@ -27,9 +27,10 @@ class Solution(object):
                     currentUnigueSubstring += s[j]
                 else:
                     break
-                allUniqueString.append(currentUnigueSubstring)
-                allLength.append(len(currentUnigueSubstring))
-        print("==> Unique string: {}".format(allUniqueString))
+                if currentUnigueSubstring not in allUniqueString:
+                    allUniqueString.append(currentUnigueSubstring)
+                    allLength.append(len(currentUnigueSubstring))
+        print("==> Unique strings: {}".format(allUniqueString))
         print("==> Length of longest substring: {}".format(max(allLength)))
         return max(allLength)
 
@@ -48,3 +49,9 @@ class TestSolution(unittest.TestCase):
 
     def test_empty_string(self):
         self.assertEqual(Solution().lengthOfLongestSubstring(""), 0)
+
+    def test_one_char(self):
+        self.assertEqual(Solution().lengthOfLongestSubstring("a"), 1)
+
+    def test_same_characters_in_a_string(self):
+        self.assertEqual(Solution().lengthOfLongestSubstring("BBBBBBBBBBBBB"), 1)

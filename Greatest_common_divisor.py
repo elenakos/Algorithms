@@ -1,5 +1,8 @@
 '''
 Find the greatest common divisor of two given positive integers.
+
+Example:
+GCD for 10 and 20 is 10
 '''
 
 import unittest

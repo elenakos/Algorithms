@@ -51,7 +51,7 @@ def insert_merge_non_overlapping_intervals(givenIntervals, intervalToInsert):
     if len(right) != 0:
         result.extend(right)        
 
-    print("The results: {}".format(result))
+    print("==> The result: {}".format(result))
     return result  
 
 

@@ -58,7 +58,7 @@ class Solution(object):
                     j += 1
                 else:
                     results.append([nums[i], nums[j], nums[k]])
-                    print("Found {}-{}-{}".format(i, j, k))
+                    print("==> Found {}-{}-{}".format(i, j, k))
                     j += 1
                     while nums[j] == nums[j - 1] and j < k:
                         print("*** Debug: {}-{}-{}".format(nums[j], j, k))
@@ -75,7 +75,7 @@ class TestSolution(unittest.TestCase):
         actual = Solution().threeSum(array)
         self.assertEqual(expected, actual)
 
-    def test_only_three_elements_no_soluiton(self):
+    def test_only_three_elements_no_solution(self):
         array = [0,1,1]
         expected = []
         actual = Solution().threeSum(array)

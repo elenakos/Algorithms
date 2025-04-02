@@ -1,6 +1,8 @@
 '''
 The Lowest Common Multiple is the smallest number that is a common multiple of two numbers.
 This solution includes three algorithms to find the LCM
+Example:
+LCM for 4 and 6 is 12
 '''
 
 import unittest

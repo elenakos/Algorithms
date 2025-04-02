@@ -18,7 +18,8 @@ def find_longest_sequence(arr):
         if math.ceil(arr[i] - arr[i+1]) == 1:    # math.ceil() is for floating variables since 4.1-3.1 = 0.9999999996, not 1!
             if seq_down:
                 current_seq += 1
-                if  max_seq < current_seq:  max_seq = current_seq
+                if  max_seq < current_seq:
+                    max_seq = current_seq
             else:
                 seq_down = True
                 seq_up = False
@@ -27,7 +28,8 @@ def find_longest_sequence(arr):
         elif math.ceil(arr[i+1] - arr[i]) == 1:
             if seq_up:
                 current_seq += 1
-                if  max_seq < current_seq:  max_seq = current_seq
+                if  max_seq < current_seq:
+                    max_seq = current_seq
             else:
                 seq_up = True
                 seq_down = False

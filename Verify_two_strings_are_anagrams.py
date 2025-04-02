@@ -1,17 +1,18 @@
 # Verify if two given strings are anagrams
 # Ignore capitalization and empty spaces
 # “cork” and “rock” -> True
-# hello an hotel -> False
+# hello hotel -> False
 
 
 def isAnagram(workingString1, workingString2):
     print("\nVerify if two strings are anagrams [{}] and [{}]".format(workingString1, workingString2))
+    # Clear strings from empty spaces
+    workingString1 = removeEmptySpacesFromString(workingString1)
+    workingString2 = removeEmptySpacesFromString(workingString2)
+
     if len(workingString1) != len(workingString2):
         print("==> The strings have different lengths so they are not anagrams")
         return False
-    # Clear strings frm empty spaces
-    workingString1 = removeEmptySpacesFromString(workingString1)
-    workingString2 = removeEmptySpacesFromString(workingString2)
 
     # Create a dictionary for the first string
     statistics = {}
@@ -43,3 +44,5 @@ assert (isAnagram("hello", "hotel") == False)
 assert (isAnagram("cork", "Rock") == True)
 assert (isAnagram("cork", "rocr") == False)
 assert (isAnagram("Grey wolf", "glory few") == True)
+assert (isAnagram("Eleven plus two", "Twelve plus one") == True)
+assert (isAnagram("dormitory", "dirty room") == True)

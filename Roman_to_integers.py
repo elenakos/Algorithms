@@ -28,7 +28,7 @@ class Solution(object):
         :type s: str
         :rtype: int
         """
-        print("\nConvert this Roman string to an integer {}.".format(s))
+        print("\nConvert this Roman string {} to an integer.".format(s))
         if len(s) == 0:
             print("The string is empty")
             return 0

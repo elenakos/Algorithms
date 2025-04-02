@@ -1,5 +1,5 @@
 '''
-Remove duplicates in a given array in-place
+Remove duplicates in a given array in-place and return a number of unique elements
 Example:
 Input: nums = [0,0,1,1,1,2,2,3,3,4]
 Output: 5, nums = [0,1,2,3,4,_,_,_,_,_]
@@ -17,6 +17,7 @@ class Solution(object):
         """
         print("\nRemove duplicates in-place from {} and return the number of unique elements".format(nums))
         if len(nums) < 2:
+            print("==> An array is too short")
             return len(nums)
         j = 1
         for i in range(1, len(nums)):
