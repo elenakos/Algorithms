@@ -40,7 +40,7 @@ ROBOT_F_SET = [0, 0, 1, 1, 1, 1, 1]
 
 class Robot:
     def __init__(self, robot_type=None, settings=None):
-        if robot_type == "":
+        if robot_type == "" or robot_type is None:
             self.robot_type = random.choice(ALL_ROBOTS).name
         elif robot_type  not in RobotTypes:
             raise ValueError(f"Robot type '{robot_type}' is not a valid robot type")
@@ -105,28 +105,28 @@ class Robot:
         return f"This robot is of [{self.robot_type.value}] type"
 
 class AssemblyLineRobots:
-    def __init__(self, robot_type=""):
+    def __init__(self, robot_type=None):
         self.robot = Robot(robot_type)
 
 
 class TestAssemblyLineRobots(unittest.TestCase):
-    def test_create_print_robot_name(self):
-        print("Create a robot and print its name")
+    def test_create_and_print_robot_name(self):
+        print("\nTC: Create a robot and print its name")
         assembly_line = AssemblyLineRobots(RobotTypes.ROBOT_A)
         actual = assembly_line.robot.__str__()
         expected = "This robot is of [Robot A] type"
         self.assertEqual(actual, expected)
 
-    def test_identify_robot(self):
-        print("Indentify a robot by its settings")
+    def test_identify_a_robot_by_settings(self):
+        print("\nTC: Indentify a robot by its settings")
         settings = [0, 0, 1, 1, 1, 1, 1]
         assembly_line = AssemblyLineRobots()
         actual = Robot(assembly_line.robot.identify_robot_type(settings)).__str__()
         expected = "This robot is of [Robot F] type"
         self.assertEqual(actual, expected)
 
-    def test_get_specific_setting_for_robot(self):
-        print("Print a specific setting value for a specific robot type")
+    def test_get_specific_setting_value_for_robot(self):
+        print("\nTC: Print a specific setting value for a specific robot type")
         robot = Robot(RobotTypes.ROBOT_E)
         actual_setting_value = robot.return_setting_value_for_a_robot(RobotSettings.ROBOT_SETTING_1)
         expected_setting_value = 1
