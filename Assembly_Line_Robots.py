@@ -39,7 +39,7 @@ ROBOT_E_SET = [1, 0, 1, 0, 1, 1, 1]
 ROBOT_F_SET = [0, 0, 1, 1, 1, 1, 1]
 
 class Robot:
-    def __init__(self, robot_type=""):
+    def __init__(self, robot_type=None, settings=None):
         if robot_type == "":
             self.robot_type = random.choice(ALL_ROBOTS).name
         elif robot_type  not in RobotTypes:
