@@ -248,8 +248,49 @@ class UnorderedList():
             current = current.next
         return my_array
 
+    def remove_duplicates_from_list(self):
+        print("Remove duplicate elements")
+        if self.head is None:
+            return
+        current = self.head
+        seen = set()
+        seen.add(current.getData())
+        previous = current
+
+        current = current.next
+
+        while current:
+            if current.getData() in seen:
+                previous.next = current.next
+            else:
+                seen.add(current.getData())
+                previous = current
+            current = current.next
+        print("Done!")
+
 
 class TestUnorderedList(unittest.TestCase):
+    def test_remove_duplicates_from_list(self):
+        print("\nTest remove duplicate elements")
+        array = [1, 2, 2, 3]
+        mylist = UnorderedList()
+        mylist.create_list_from_array(array)
+        expected_list = [1, 2, 3]
+        mylist.remove_duplicates_from_list()
+        actual_list = mylist.create_list_as_array()
+        self.assertEqual(expected_list, actual_list)
+
+    def test_remove_duplicates_in_head_from_list(self):
+        print("\nTest remove duplicate elements")
+        array = [1, 1, 1, 2, 2, 3, 4, 3]
+        mylist = UnorderedList()
+        mylist.create_list_from_array(array)
+        expected_list = [1, 2, 3, 4]
+        mylist.remove_duplicates_from_list()
+        actual_list = mylist.create_list_as_array()
+        self.assertEqual(expected_list, actual_list)
+
+
     def test_merge_two_lists(self):
         print("\n*** TC: Merge two lists")
         list1 = UnorderedList()
