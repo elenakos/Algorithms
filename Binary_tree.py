@@ -47,7 +47,7 @@ class BinaryTree():
         return self.root
 
 
-    def travers_tree(self, node, result=[]):
+    def travers_tree(self, node, result):
         '''
         - Visit the left subtree.
         - Visit the root node.
@@ -68,8 +68,50 @@ class BinaryTree():
             return True
         return self.find_element_in_tree(node.left, val) or self.find_element_in_tree(node.right, val)
 
+    def is_tree_symmetrical(self, node):
+        if not node:
+            return True
+        return self.dfs(node.left, node.right)
+
+    def dfs(self, left, right):
+        if left and right:
+            return left.val == right.val and self.dfs(left.left, right.right) and self.dfs(left.right, right.left)
+        return left == right
+
 
 class TestBinaryTree(unittest.TestCase):
+    def test_check_if_tree_is_symmetrical(self):
+        print("\n*** TC: Check if a tree is symmetrical")
+        '''
+                      1
+                    /  \
+                   2     2
+                  / \   / \
+                 3   4  4  3
+        '''
+        array = [1, 2, 2, 3, 4, 4, 3]
+        binary_tree = BinaryTree()
+        root = binary_tree.create_binary_tree_from_array(array)
+        expected = True
+        actual = binary_tree.is_tree_symmetrical(root)
+        self.assertEqual(expected, actual)
+
+    def test_check_if_tree_is_not_symmetrical(self):
+        print("\n*** TC: Check if a tree is not symmetrical")
+        '''
+                     1
+                    / \
+                   2   2
+                   \    \
+                    3    3
+        '''
+        array = [1, 2, 2, None, 3, None, 3]
+        binary_tree = BinaryTree()
+        root = binary_tree.create_binary_tree_from_array(array)
+        expected = False
+        actual = binary_tree.is_tree_symmetrical(root)
+        self.assertEqual(expected, actual)
+
     def test_travers_tree(self):
         print("\n*** TC: Test traversing a tree")
         '''
@@ -81,7 +123,6 @@ class TestBinaryTree(unittest.TestCase):
         '''
         arr = [1, 2, 3, None, 5]
         binary_tree = BinaryTree()
-        root = TreeNode()
         root = binary_tree.create_binary_tree_from_array(arr)
         result = []
         binary_tree.travers_tree(root, result)
@@ -99,7 +140,6 @@ class TestBinaryTree(unittest.TestCase):
         '''
         arr = [1, 2, 3, 4, 5, None, 6]
         binary_tree = BinaryTree()
-        root = TreeNode()
         root = binary_tree.create_binary_tree_from_array(arr)
         result = []
         binary_tree.travers_tree(root, result)
@@ -119,7 +159,6 @@ class TestBinaryTree(unittest.TestCase):
         '''
         arr =  [1, 2, 3, 4, 5, None, 7, 8, None, 10]
         binary_tree = BinaryTree()
-        root = TreeNode()
         root = binary_tree.create_binary_tree_from_array(arr)
         result = []
         binary_tree.travers_tree(root, result)
@@ -137,7 +176,6 @@ class TestBinaryTree(unittest.TestCase):
         '''
         arr = [1, 2, 3, 4, 5, None, 6]
         binary_tree = BinaryTree()
-        root = TreeNode()
         root = binary_tree.create_binary_tree_from_array(arr)
         expected = True
         actual = binary_tree.find_element_in_tree(root, 3)
