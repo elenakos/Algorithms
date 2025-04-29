@@ -74,10 +74,25 @@ class BinaryTree():
         return self.dfs(node.left, node.right)
 
     def dfs(self, left, right):
+        # Depth-First Search
         if left and right:
             return left.val == right.val and self.dfs(left.left, right.right) and self.dfs(left.right, right.left)
         return left == right
 
+    def return_all_paths(self):
+        paths = []
+        def dfs(node, path):
+            if not node:
+                return
+
+            path.append(str(node.val))
+            if not node.left and not node.right:
+                paths.append("->".join(path))
+            else:
+                dfs(node.left, path.copy())
+                dfs(node.right, path.copy())
+        dfs(self.root, [])
+        return paths
 
 class TestBinaryTree(unittest.TestCase):
     def test_check_if_tree_is_symmetrical(self):
@@ -179,4 +194,38 @@ class TestBinaryTree(unittest.TestCase):
         root = binary_tree.create_binary_tree_from_array(arr)
         expected = True
         actual = binary_tree.find_element_in_tree(root, 3)
+        self.assertEqual(actual, expected)
+
+    def test_return_all_paths(self):
+        print("\n*** TC: Test returning all paths")
+        '''
+              1
+             / \
+            2   3
+             \   
+              5   
+        '''
+        arr = [1, 2, 3, None, 5]
+        binary_tree = BinaryTree()
+        root = binary_tree.create_binary_tree_from_array(arr)
+        actual = binary_tree.return_all_paths()
+        expected = ['1->2->5', '1->3']
+        self.assertEqual(actual, expected)
+
+    def test_return_all_paths_for_levels(self):
+        print("\n*** TC: Test returning all paths for a bigger binary tree")
+        '''
+                 1
+                / \
+               2   3
+              / \   \
+             4   5   7
+            /   /     \
+           8   10      11
+        '''
+        arr =  [1, 2, 3, 4, 5, None, 7, 8, None, 10, None, None, 11]
+        binary_tree = BinaryTree()
+        root = binary_tree.create_binary_tree_from_array(arr)
+        actual = binary_tree.return_all_paths()
+        expected = ['1->2->4->8', '1->2->5->10', '1->3->7->11']
         self.assertEqual(actual, expected)
