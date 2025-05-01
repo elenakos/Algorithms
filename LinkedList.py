@@ -138,10 +138,6 @@ class UnorderedList():
 
 
     def reverse_list(self, head):
-        """
-        :type head: Optional[ListNode]
-        :rtype: Optional[ListNode]
-        """
         print("Reverse the list")
         # Keep track of previous, current, next
         previous = None
@@ -205,12 +201,8 @@ class UnorderedList():
         self.create_list_from_array(my_array)
 
     @staticmethod
-    def merge_two_lists(list1, list2):
-        """
-        :type list1: Optional[ListNode]
-        :type list2: Optional[ListNode]
-        :rtype: Optional[ListNode]
-        """
+    def merge_two_sorted_lists(list1, list2):
+        print("Merge two sorted lists")
         if list1 is None:
             return list2
         if list2 is None:
@@ -248,7 +240,7 @@ class UnorderedList():
             current = current.next
         return my_array
 
-    def remove_duplicates_from_list(self):
+    def remove_duplicates_from_sorted_list(self):
         print("Remove duplicate elements")
         if self.head is None:
             return
@@ -256,7 +248,6 @@ class UnorderedList():
         seen = set()
         seen.add(current.getData())
         previous = current
-
         current = current.next
 
         while current:
@@ -276,7 +267,7 @@ class TestUnorderedList(unittest.TestCase):
         mylist = UnorderedList()
         mylist.create_list_from_array(array)
         expected_list = [1, 2, 3]
-        mylist.remove_duplicates_from_list()
+        mylist.remove_duplicates_from_sorted_list()
         actual_list = mylist.create_list_as_array()
         self.assertEqual(expected_list, actual_list)
 
@@ -286,7 +277,7 @@ class TestUnorderedList(unittest.TestCase):
         mylist = UnorderedList()
         mylist.create_list_from_array(array)
         expected_list = [1, 2, 3, 4]
-        mylist.remove_duplicates_from_list()
+        mylist.remove_duplicates_from_sorted_list()
         actual_list = mylist.create_list_as_array()
         self.assertEqual(expected_list, actual_list)
 
@@ -301,7 +292,7 @@ class TestUnorderedList(unittest.TestCase):
         list2.create_list_from_array(array2)
         merged_list = UnorderedList()
         expected_list = [1, 1, 2, 3, 4, 5, 6]
-        actual_list = merged_list.merge_two_lists(list1, list2)
+        actual_list = merged_list.merge_two_sorted_lists(list1, list2)
         actual_array = UnorderedList().traverse_list_from_head_return_array(actual_list)
         self.assertEqual(expected_list, actual_array)
 
@@ -315,7 +306,7 @@ class TestUnorderedList(unittest.TestCase):
         list2.create_list_from_array(array2)
         merged_list = UnorderedList()
         expected_list = [1, 2, 3, 15, 25, 65, 70, 80]
-        actual_list = merged_list.merge_two_lists(list1, list2)
+        actual_list = merged_list.merge_two_sorted_lists(list1, list2)
         actual_array = UnorderedList().traverse_list_from_head_return_array(actual_list)
         self.assertEqual(expected_list, actual_array)
 
@@ -329,7 +320,7 @@ class TestUnorderedList(unittest.TestCase):
         list2.create_list_from_array(array2)
         merged_list = UnorderedList()
         expected_list = [1, 4, 5, 6]
-        actual_list = merged_list.merge_two_lists(list1, list2)
+        actual_list = merged_list.merge_two_sorted_lists(list1, list2)
         actual_array = UnorderedList().traverse_list_from_head_return_array(actual_list)
         self.assertEqual(expected_list, actual_array)
 
