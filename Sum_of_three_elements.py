@@ -87,6 +87,12 @@ class TestSolution(unittest.TestCase):
         actual = Solution().threeSum(array)
         self.assertEqual(expected, actual)
 
+    def test_all_elements_zero(self):
+        array = [0, 0, 0, 0, 0, 0, 0]
+        expected = [[0, 0, 0]]
+        actual = Solution().threeSum(array)
+        self.assertEqual(expected, actual)
+
     def test_array_too_short_no_solution(self):
         array = [0, 2]
         expected = []

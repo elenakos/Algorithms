@@ -5,7 +5,7 @@ This is an algorithm for the fractional knapsack problem.
 import unittest
 
 class Knapsack:
-    def maximize_knapsack_value(capacity, items):
+    def maximize_knapsack_value(self, capacity, items):
         print("\nCalculate max value that can fit in a knapsack with capacity {}, with items {}".format(capacity, items)   )
         if capacity <= 0:
             print("==> Capacity value is wrong: {}".format(capacity))
@@ -40,7 +40,7 @@ class TestKnapsack(unittest.TestCase):
         capacity = 0
         items = [(60, 20), (100, 50), (120, 30)]
         expected = 0
-        actual = Knapsack.maximize_knapsack_value(capacity, items)
+        actual = Knapsack().maximize_knapsack_value(capacity, items)
         self.assertEqual(expected, actual)
 
     def test_knapsack_valid_1(self):
@@ -48,7 +48,7 @@ class TestKnapsack(unittest.TestCase):
         capacity = 50
         items = [(60, 20), (100, 50), (120, 30)]
         expected = 180
-        actual = Knapsack.maximize_knapsack_value(capacity, items)
+        actual = Knapsack().maximize_knapsack_value(capacity, items)
         self.assertEqual(expected, actual)
 
     def test_knapsack_valid_2(self):
@@ -56,7 +56,7 @@ class TestKnapsack(unittest.TestCase):
         capacity = 40
         items = [(10, 30), (20, 10), (30, 40), (40, 20)]
         expected = 67.5
-        actual = Knapsack.maximize_knapsack_value(capacity, items)
+        actual = Knapsack().maximize_knapsack_value(capacity, items)
         self.assertEqual(expected, actual)
 
     def test_one_item(self):
@@ -64,5 +64,5 @@ class TestKnapsack(unittest.TestCase):
         capacity = 10
         items = [(500, 30)]
         expected = 166.66666666666666
-        actual = Knapsack.maximize_knapsack_value(capacity, items)
+        actual = Knapsack().maximize_knapsack_value(capacity, items)
         self.assertEqual(expected, actual)
