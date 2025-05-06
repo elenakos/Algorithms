@@ -71,12 +71,12 @@ class BinaryTree():
     def is_tree_symmetrical(self, node):
         if not node:
             return True
-        return self.dfs(node.left, node.right)
+        return self.depth_first_search(node.left, node.right)
 
-    def dfs(self, left, right):
+    def depth_first_search(self, left, right):
         # Depth-First Search
         if left and right:
-            return left.val == right.val and self.dfs(left.left, right.right) and self.dfs(left.right, right.left)
+            return left.val == right.val and self.depth_first_search(left.left, right.right) and self.depth_first_search(left.right, right.left)
         return left == right
 
     def return_all_paths(self):
@@ -212,7 +212,7 @@ class TestBinaryTree(unittest.TestCase):
         expected = ['1->2->5', '1->3']
         self.assertEqual(actual, expected)
 
-    def test_return_all_paths_for_levels(self):
+    def test_return_all_paths_four_levels(self):
         print("\n*** TC: Test returning all paths for a bigger binary tree")
         '''
                  1
