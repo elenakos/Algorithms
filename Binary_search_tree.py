@@ -53,7 +53,39 @@ class BinarySearchTree():
             result.append(node.val)
             self.traverse_BST(node.right, result)
 
+    def search_BST(self, root, target):
+        if root is None:
+            print("==> No more nodes to check left")
+            return False
+
+        if root.val == target:
+            print("==> A value is found")
+            return True
+        elif target < root.val:
+            return self.search_BST(root.left, target)
+        else:
+            return self.search_BST(root.right, target)
+
+    def insert_value_into_binary_search_tree(self, root, value):
+           if not root:
+               # Create a new node if a tree is missing
+               return TreeNode(value)
+           if value < root.val:
+               # Search-insert on the left (smaller) subtree
+               root.left = self.insert_value_into_binary_search_tree(root.left, value)
+           elif value > root.val:
+               # Search-insert on the right (larger) subtree
+               root.right = self.insert_value_into_binary_search_tree(root.right, value)
+           else:
+               # Deal with a duplicate - let's add it to the left
+               root.left = self.insert_value_into_binary_search_tree(root.left, root.val)
+               pass
+
+           return root
+
     def create_array_from_BST(self, root):
+        # Create an array that can be used to construct a binary tree
+        # including None for missing "children"
         if not root:
             return []
         result = []
@@ -129,3 +161,51 @@ class TestBinarySearchTree(unittest.TestCase):
         actual = bst.create_array_from_BST(root)
         expected = [3, 1]
         self.assertEqual(expected, actual)
+
+    def test_search_and_find(self):
+        print("\n*** TC: Search and find a node in a BST")
+        """
+        """
+        nums = [-25, -10, -5, -3, -1, 0, 5, 6, 9, 1, 17, 23]
+        bst = BinarySearchTree()
+        root = bst.sorted_array_to_BST(nums)
+        actual = bst.search_BST(root, 5)
+        expected = True
+        self.assertEqual(expected, actual)
+
+    def test_search_and_do_not_find(self):
+        print("\n*** TC: Search and find a node in a BST")
+        """
+        """
+        nums = [-25, -10, -5, -3, -1, 0, 5, 6, 9, 1, 17, 23]
+        bst = BinarySearchTree()
+        root = bst.sorted_array_to_BST(nums)
+        actual = bst.search_BST(root, 33)
+        expected = False
+        self.assertEqual(expected, actual)
+
+    def test_insert_a_new_node(self):
+        print("\n*** TC: Insert a new node in a BST")
+        """
+        """
+        nums = [-25, -10, -5, -3, -1, 0, 5, 6, 9, 1, 17, 23]
+        bst = BinarySearchTree()
+        root = bst.sorted_array_to_BST(nums)
+        root = bst.insert_value_into_binary_search_tree(root, 3)
+        result = []
+        bst.traverse_BST(root, result)
+        expected = [-25, -10, -5, -3, -1, 0, 3, 5, 6, 9, 1, 17, 23]
+        self.assertEqual(expected, result)
+
+    def test_s_duplicte_node(self):
+        print("\n*** TC: Insert a duplicate node in a BST")
+        """
+        """
+        nums = [-25, -10, -5, -3, -1, 0, 5, 6, 9, 1, 17, 23]
+        bst = BinarySearchTree()
+        root = bst.sorted_array_to_BST(nums)
+        root = bst.insert_value_into_binary_search_tree(root, 5)
+        result = []
+        bst.traverse_BST(root, result)
+        expected = [-25, -10, -5, -3, -1, 0, 5, 5, 6, 9, 1, 17, 23]
+        self.assertEqual(expected, result)
