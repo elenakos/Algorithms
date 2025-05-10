@@ -197,7 +197,7 @@ class TestBinarySearchTree(unittest.TestCase):
         expected = [-25, -10, -5, -3, -1, 0, 3, 5, 6, 9, 1, 17, 23]
         self.assertEqual(expected, result)
 
-    def test_s_duplicte_node(self):
+    def test_add_duplicate_node(self):
         print("\n*** TC: Insert a duplicate node in a BST")
         """
         """
