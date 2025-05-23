@@ -3,8 +3,6 @@ Given an array, filter element by even or odd numbers using functional programmi
 Example:
     [10, 11, 12, 13, 14, 15] --> [10, 12, 14]
 '''
-from unittest import result
-
 
 def filter_array_normal_way(array, trigger="even"):
     if len(array) < 1:
