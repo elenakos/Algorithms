@@ -23,6 +23,8 @@ class Solution:
         #print("Find days |i - reverse(i)| is evenly divisible by {}".format(k))
         beautiful_days = []
         for i in range(len(array)):
+            if not isinstance(array[i], int):
+                continue
             if self.is_day_beautiful(array[i], k):
                 beautiful_days.append(array[i])
         return len(beautiful_days)
@@ -31,13 +33,9 @@ class Solution:
         #print("Check if |i - reverse(i)| is evenly divisible by k.")
         result = False
         number_string = str(number)
-        number_string = number_string[::-1]
-        reverse_number_string = ""
-        if int(number_string[0]) > 0:
-            reverse_number_string = number_string[0]
-
-        for i in range(1, len(number_string)):
-            reverse_number_string += number_string[i]
+        reverse_number_string = number_string[::-1]
+        if int(reverse_number_string[0]) == 0:
+            reverse_number_string = reverse_number_string[1:]
         reverse_number = int(reverse_number_string)
         result = abs(number - reverse_number) % k == 0
         return result
@@ -61,8 +59,24 @@ class SolveSolution(unittest.TestCase):
         self.assertEqual(expected, actual)
 
     def test_one_element_same_as_reversed(self):
-        print("\n*** TC: One element is a beautiful day ***")
+        print("\n*** TC: One element the same digits ***")
         arr = [20, 22222]
+        k = 3
+        expected = 2
+        actual = Solution().find_beautiful_days(arr, k)
+        self.assertEqual(expected, actual)
+
+    def test_no_beautiful_day(self):
+        print("\n*** TC: No beautiful days ***")
+        arr = [30, 17, 23654]
+        k = 5
+        expected = 0
+        actual = Solution().find_beautiful_days(arr, k)
+        self.assertEqual(expected, actual)
+
+    def test_one_element_id_word(self):
+        print("\n*** TC: One element is a word ***")
+        arr = [20, 23, "Hello!"]
         k = 3
         expected = 2
         actual = Solution().find_beautiful_days(arr, k)
