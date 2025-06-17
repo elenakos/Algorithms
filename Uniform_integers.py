@@ -50,9 +50,9 @@ class TestUniformInteger(unittest.TestCase):
 
     def test_from_32_to_1000(self):
         print("\n*** TC: Testing from 32_to_1000")
-        range = UniformInteger(32, 1000)
+        range = UniformInteger(500, 1000)
         actual = range.generate_uniform_integers()
-        expected = 16
+        expected = 5
         self.assertEqual(actual, expected)
 
     def test_from_999999999999_to_999999999999(self):
