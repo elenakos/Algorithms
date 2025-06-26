@@ -61,10 +61,11 @@ class Solution(object):
             if ch in pair.values():
                 # check if the last element in brackets_stack is the kay for this value
                 if len(brackets_stack) == 0:
-                    print("==> TNo matching open bracket: {}".format(ch))
+                    print("==> No prior open brackets at all")
                     return False
                 last_bracket = brackets_stack.pop()
                 if pair[last_bracket] != ch:
+                    print("==> No matching open bracket: {}".format(ch))
                     return False
         if len(brackets_stack) != 0:
             print("==> Not all brackets were closed")
