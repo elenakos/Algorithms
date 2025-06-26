@@ -43,11 +43,43 @@ class Solution(object):
         print("==> All matching brackets were closed")
         return True
 
+    def is_valid_using_dictionary(self, s):
+        print("\nChecking if '{}' is valid using dictionary ".format(s))
+        if len(s) == 0:
+            print("==> The string is empty")
+            return False
+        # define a dictionary
+        pair = {"(": ")", "{" : "}", "[" : "]"}
+        brackets_stack = []
+        for ch in s:
+            if ch in pair.keys():
+                brackets_stack.append(ch)
+            if ch in pair.values():
+                # check if the last element in brackets_stack is the kay for this value
+                if len(brackets_stack) == 0:
+                    print("==> TNo matching open bracket: {}".format(ch))
+                    return False
+                last_bracket = brackets_stack.pop()
+                if pair[last_bracket] != ch:
+                    return False
+        if len(brackets_stack) != 0:
+            print("==> Not all brackets were closed")
+            return False
+        print("==> All matching brackets were closed")
+        return True
+
+
 class TestSolution(unittest.TestCase):
     def test_case_valid(self):
         s = "()"
         expected = True
         actual = Solution().isValid(s)
+        self.assertEqual(expected, actual)
+
+    def test_case_valid_using_dict(self):
+        s = "()"
+        expected = True
+        actual = Solution().is_valid_using_dictionary(s)
         self.assertEqual(expected, actual)
 
     def test_case_invalid_open(self):
@@ -56,10 +88,22 @@ class TestSolution(unittest.TestCase):
         actual = Solution().isValid(s)
         self.assertEqual(expected, actual)
 
+    def test_case_invalid_open_using_dict(self):
+        s = "("
+        expected = False
+        actual = Solution().is_valid_using_dictionary(s)
+        self.assertEqual(expected, actual)
+
     def test_case_invalid_close(self):
         s = ")"
         expected = False
         actual = Solution().isValid(s)
+        self.assertEqual(expected, actual)
+
+    def test_case_invalid_close_using_dict(self):
+        s = ")"
+        expected = False
+        actual = Solution().is_valid_using_dictionary(s)
         self.assertEqual(expected, actual)
 
     def test_case_invalid_empty(self):
@@ -68,14 +112,32 @@ class TestSolution(unittest.TestCase):
         actual = Solution().isValid(s)
         self.assertEqual(expected, actual)
 
+    def test_case_invalid_empty_using_dict(self):
+        s = ""
+        expected = False
+        actual = Solution().is_valid_using_dictionary(s)
+        self.assertEqual(expected, actual)
+
     def test_case_invalid_valid_no_brackets(self):
         s = "Hello"
         expected = True
         actual = Solution().isValid(s)
         self.assertEqual(expected, actual)
 
+    def test_case_invalid_valid_no_brackets_using_dict(self):
+        s = "Hello"
+        expected = True
+        actual = Solution().is_valid_using_dictionary(s)
+        self.assertEqual(expected, actual)
+
     def test_case_invalid_valid_all_brackets(self):
         s = "Hello ({[]})"
         expected = True
         actual = Solution().isValid(s)
+        self.assertEqual(expected, actual)
+
+    def test_case_invalid_valid_all_brackets_using_dict(self):
+        s = "Hello ({[]})"
+        expected = True
+        actual = Solution().is_valid_using_dictionary(s)
         self.assertEqual(expected, actual)
