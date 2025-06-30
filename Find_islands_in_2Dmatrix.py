@@ -23,8 +23,9 @@ def get_number_of_islands(binaryMatrix) -> int:
     def dfs(row, col):
         if row < 0 or row >= r or col < 0 or col >= c or binaryMatrix[row][col] == 0:
             return
-        # Replace the current element with 0 so no repeat searches will be done
+        # Replace the current element value 1 with 0 so no repeat searches/counting will be done
         binaryMatrix[row][col] = 0
+        # Review/update adjacent cells
         dfs(row-1, col)
         dfs(row+1, col)
         dfs(row, col-1)
