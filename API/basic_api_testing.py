@@ -12,23 +12,19 @@ import requests
 # VARIABLES
 URL = "https://jsonplaceholder.typicode.com"
 
-def test_get_response():
-    print("\n*** TC: Verify GET returns 100 records")
+def test_get_response_number():
+    print("\n*** TC: Verify GET/posts returns 100 records")
     url = URL + "/posts"
-
-    # Make the GET request
     response = requests.get(url)
-
-    # Check the response
     assert response.status_code == 200
     assert isinstance(response.json(), list)
     print(f"Number of records: {len(response.json())}")
     assert response.json().__len__() == 100
 
-def test_post_request():
-    print("\n*** TC: Verify POST returns correct sent data")
+def test_post_request_title():
+    print("\n*** TC: Verify POST/posts returns correct sent title")
     title = "Hello from Python"
-    body = "Hello from Python"
+    body = "Post by Python"
     url = URL + "/posts"
     payload = {"title": title, "body": body}
     headers = {'Content-Type': 'application/json'}
