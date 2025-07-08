@@ -25,3 +25,17 @@ def test_get_response():
     print(f"Number of records: {len(response.json())}")
     assert response.json().__len__() == 100
 
+def test_post_request():
+    print("\n*** TC: Verify POST returns correct sent data")
+    title = "Hello from Python"
+    body = "Hello from Python"
+    url = URL + "/posts"
+    payload = {"title": title, "body": body}
+    headers = {'Content-Type': 'application/json'}
+    response = requests.post(url, json=payload, headers=headers)
+    # Check the response
+    assert response.status_code == 201
+    assert isinstance(response.json(), dict)
+    print(f"Saved data: {response.json()}")
+    assert response.json().get("title") == title
+
