@@ -12,7 +12,8 @@ def open_and_type_text(app_name, text_to_type):
         pyautogui.write(app_name)
         pyautogui.press('enter')
     elif platform.system() == "Darwin": # macOS
-        pyautogui.hotkey('command', 'space') # Open Spotlight Search
+        # Open Spotlight Search
+        pyautogui.hotkey('command', 'space')
         pyautogui.write(app_name)
         pyautogui.press('enter')
         # Open a new document
@@ -24,15 +25,16 @@ def open_and_type_text(app_name, text_to_type):
     time.sleep(2) # Give the application time to open
 
     print(f"Typing text into {app_name}...")
-    pyautogui.write(text_to_type, interval=0.05) # Type characters with a slight delay
-
-    time.sleep(1) # Wait a moment
-
+    # Type characters with a slight delay
+    pyautogui.write(text_to_type, interval=0.05)
+    # Wait a moment
+    time.sleep(1)
 
     # Close the application (without saving)
     print(f"Closing {app_name}...")
     if platform.system() == "Windows":
-        pyautogui.hotkey('alt', 'f4') # Close active window
+        # Close active window
+        pyautogui.hotkey('alt', 'f4')
         time.sleep(0.5)
         # Handle "Do you want to save?" dialog if it appears
         # Look for a "Don't Save" or "No" button
@@ -48,7 +50,8 @@ def open_and_type_text(app_name, text_to_type):
         # Handle "Do you want to save?" dialog if it appears
         try:
             # Look for a "Don't Save" or "Delete" button
-            # pyautogui.click('dont_save_button_mac.png') # If you have a screenshot
+            # If you have a screenshot
+            # pyautogui.click('dont_save_button_mac.png')
             pyautogui.press('delete') # Often 'Delete' is the default for "Don't Save"
         except Exception:
             print("No save dialog detected or dismissed.")
