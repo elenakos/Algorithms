@@ -1,0 +1,3 @@
+Hello from python : Hello from Java : Hello World
+Hello from JavaScript : Hello from python : Hello World
+Hello World : Hello, beautiful World : Hello from JavaScript
