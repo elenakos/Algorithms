@@ -9,29 +9,31 @@ import unittest
 
 def verify_events(array):
     print("Verify if events happen in order")
-    # define a stack of expected events in order
-    expected = ["startA", "completeA", "startB", "completeB", "startC", "completeC"]
-    expected.reverse()
+
+    # Define a stack of expected events in order
+    expected_events = ["startA", "completeA", "startB", "completeB", "startC", "completeC"]
 
     if len(array) < 6:
         print("Not enough events to complete steps A → B → C")
         return False
 
-    # Navigate through the even array
+    # Navigate through the events array
+    current_expected_index = 0
     for event in array:
         #print("Current in events: {}".format(event))
-        if event in expected:
-            expected_event = expected.pop()
+        if event in expected_events:
+            expected_event = expected_events[current_expected_index]
             #print("Popped from the expected event: {}".format(exp))
             if expected_event != event:
                 print("Expected event {} is not the same as an actual event {}".format(event, expected_event))
                 return False
+            current_expected_index += 1
 
-    if len(expected) == 0:
-        print("All events went in the correct order")
+    if current_expected_index == len(expected_events):
+        print("All events were correct!")
         return True
 
-    print("Not all events went in the correct order")
+    print("Some events did not happen: {}".format(expected_events[current_expected_index:]))
     return False
 
 
@@ -41,9 +43,14 @@ class TestSolution(unittest.TestCase):
         event1 = ["startA", "completeA", "startB", "completeB", "completeC"]
         self.assertFalse(verify_events(event1))
 
-    def test_not_all_events(self):
+    def test_event_not_in_order(self):
         print("\n*** TC: Test not all events ***")
         event2 = ["startA", "completeA", "doSomething", "startC", "completeC", "doSomething", "startB", "completeB"]
+        self.assertFalse(verify_events(event2))
+
+    def test_not_all_events(self):
+        print("\n*** TC: Test not all events are completed ***")
+        event2 = ["startA", "completeA", "doSomething", "startB", "something", "completeB", "startC",  "doSomething"]
         self.assertFalse(verify_events(event2))
 
     def test_all_events(self):
