@@ -22,6 +22,9 @@ def verify_events(array):
     for event in array:
         #print("Current in events: {}".format(event))
         if event in expected_events:
+            if current_expected_index == len(expected_events):
+                print("There is some repeated event")
+                return False
             expected_event = expected_events[current_expected_index]
             #print("Popped from the expected event: {}".format(exp))
             if expected_event != event:
@@ -57,3 +60,8 @@ class TestSolution(unittest.TestCase):
         print("\n*** TC: Test all events ***")
         event3 = ["startA", "doSomething", "completeA", "startB", "completeB", "startC", "doSomething", "completeC"]
         self.assertTrue(verify_events(event3))
+
+    def test_all_events_with_repeats(self):
+        print("\n*** TC: Test all events with one repeat ***")
+        event3 = ["startA", "doSomething", "completeA", "startB", "completeB", "startC", "doSomething", "completeC", "doSomething", "startB"]
+        self.assertFalse(verify_events(event3))
